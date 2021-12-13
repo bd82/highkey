@@ -1,0 +1,37 @@
+<head>
+  <link href="https://vjs.zencdn.net/7.17.0/video-js.css" rel="stylesheet"/>
+</head>
+
+<body>
+<script src="https://vjs.zencdn.net/7.17.0/video.min.js"></script>
+<script src="//cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js"></script>
+
+<video id="my-player" class="video-js">
+</video>
+
+<script>
+  var player = videojs('my-player', {
+    controls: true, autoplay: false,
+    preload: false,
+    muted: true,
+    playbackRates: [0.25, 0.5, 1, 1.5, 2],
+    width: 1664,
+    height:936
+  });
+
+  player.ready(function() {
+    this.hotkeys({
+      volumeStep: 0.1,
+      seekStep: 5,
+      enableModifiersForNumbers: false
+    });
+  });
+
+  player.src({
+    type: 'video/mp4',
+    // TODO: get source by parameter
+    src: "https://www.dropbox.com/s/513oxk4qqb0s1bx/666_bomb.mp4?raw=1"
+  });
+</script>
+
+</body>
