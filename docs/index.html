@@ -27,10 +27,25 @@
     });
   });
 
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  if (!urlParams.has("vid")) {
+    alert("missing 'vid' url param, e.g https://....index.html/?vid=https://vjs.zencdn.net/v/oceans.mp4")
+  }
+  const orgVidSrc = urlParams.get("vid");
+  let processedVidSrc
+
+  if (/www.dropbox.com/.test(orgVidSrc)) {
+    processedVidSrc = orgVidSrc.replace(/\?.*$/, "?raw=1");
+  } else {
+    processedVidSrc = orgVidSrc;
+  }
+
+  console.log(`processedVidSrc==="${processedVidSrc}"`)
   player.src({
     type: 'video/mp4',
-    // TODO: get source by parameter
-    src: "https://www.dropbox.com/s/513oxk4qqb0s1bx/666_bomb.mp4?raw=1"
+    src: processedVidSrc
   });
 </script>
 
